@@ -1,0 +1,825 @@
+/* CSS Custom Properties - Material Design 3 (Sleek Light Mode) */
+:root {
+  --md-sys-color-background: #faf8f5; /* Crema cálido suave */
+  --md-sys-color-surface: #ffffff;
+  --md-sys-color-surface-variant: #f8fafc;
+  --md-sys-color-primary: #6366f1; /* Indigo */
+  --md-sys-color-primary-rgb: 99, 102, 241;
+  --md-sys-color-primary-container: #e0e7ff;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-secondary: #10b981; /* Esmeralda */
+  --md-sys-color-secondary-container: #d1fae5;
+  --md-sys-color-error: #ef4444; /* Rojo */
+  --md-sys-color-error-container: #fee2e2;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-outline: #cbd5e1;
+  --md-sys-color-on-surface: #1e293b;
+  --md-sys-color-on-surface-variant: #64748b;
+  
+  --elevation-1: 0px 1px 3px rgba(0, 0, 0, 0.05), 0px 1px 2px rgba(0, 0, 0, 0.1);
+  --elevation-2: 0px 4px 10px rgba(0, 0, 0, 0.06), 0px 2px 4px rgba(0, 0, 0, 0.06);
+  --elevation-3: 0px 10px 25px rgba(0, 0, 0, 0.08), 0px 5px 10px rgba(0, 0, 0, 0.08);
+  
+  --transition-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-surface);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* App Bar */
+.app-bar {
+  background-color: var(--md-sys-color-surface);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 1rem 2rem;
+  box-shadow: var(--elevation-1);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.app-bar-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.icon-logo {
+  font-size: 2.25rem;
+  color: var(--md-sys-color-primary);
+  background: rgba(var(--md-sys-color-primary-rgb), 0.08);
+  padding: 0.5rem;
+  border-radius: 12px;
+}
+
+.title-container h1 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--md-sys-color-on-surface);
+}
+
+.title-container .subtitle {
+  font-size: 0.8rem;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Main Layout Grid */
+.main-container {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  flex: 1;
+  width: 100%;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .main-container {
+    grid-template-columns: 1fr;
+    max-width: 650px;
+  }
+}
+
+/* ==========================================================================
+   CHASIS MÁQUINA EXPENDEDORA FÍSICA
+   ========================================================================== */
+.vending-machine {
+  background: #f1f5f9;
+  border: 10px solid #e2e8f0;
+  border-radius: 40px;
+  padding: 1.75rem;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.5rem;
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.1),
+    inset 0 4px 10px rgba(255, 255, 255, 0.8),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  border-bottom-width: 15px; /* Base de la máquina más gruesa */
+}
+
+/* Vitrina de Cristal (Izquierda) */
+.machine-showcase {
+  background-color: #0f172a; /* Fondo oscuro interior de la máquina */
+  border: 5px solid #64748b;
+  border-radius: 24px;
+  padding: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  grid-column: 1;
+  grid-row: 1;
+  box-shadow: 
+    inset 0 10px 30px rgba(0,0,0,0.85),
+    0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Reflejo del vidrio */
+.glass-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.03) 40%, 
+    rgba(255, 255, 255, 0) 50%
+  );
+  transform: skewX(-30deg);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Repisas de la Vitrina */
+.shelves-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.shelf {
+  position: relative;
+  background: #1e293b;
+  padding: 0.5rem 1rem 0 1rem;
+  border-top: 2px solid #475569;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 130px;
+}
+
+/* Borde frontal metálico de la repisa */
+.shelf-edge {
+  background: #cbd5e1;
+  color: #1e293b;
+  height: 24px;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  border-top: 1px solid #e2e8f0;
+}
+
+.shelf-code {
+  color: #3b82f6;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.shelf-price {
+  color: #dc2626;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* Espiral Helicoide Detrás de los Productos */
+.spiral-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  margin-bottom: -4px;
+}
+
+.spiral {
+  position: absolute;
+  width: 90%;
+  height: 48px;
+  bottom: 8px;
+  left: 5%;
+  opacity: 0.65;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Tarjetas de Producto en Repisas (Modelos Físicos) */
+.product-card.physical-prod {
+  background: #ffffff;
+  border: 3px solid transparent;
+  border-radius: 12px;
+  padding: 0.5rem 0.75rem;
+  width: 115px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.3), 
+    0 10px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s var(--transition-standard);
+}
+
+.product-card.physical-prod:hover {
+  transform: translateY(-5px) scale(1.03);
+  border-color: #cbd5e1;
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.4), 
+    0 15px 25px rgba(0, 0, 0, 0.3);
+}
+
+.product-card.physical-prod.selected {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 
+    0 0 0 2px rgba(99, 102, 241, 0.3),
+    0 12px 24px rgba(99, 102, 241, 0.4);
+  background: #f5f3ff;
+}
+
+.product-icon-wrapper {
+  background-color: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-primary);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.product-icon-wrapper span {
+  font-size: 1.5rem;
+}
+
+.product-card.physical-prod .product-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #334155;
+  text-align: center;
+}
+
+
+/* ==========================================================================
+   COLUMNA DE CONTROL (DERECHA)
+   ========================================================================== */
+.machine-panel {
+  background: #f1f5f9;
+  border: 4px solid #cbd5e1;
+  border-radius: 24px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  grid-column: 2;
+  grid-row: 1;
+  box-shadow: 
+    inset 0 3px 6px rgba(255, 255, 255, 0.7),
+    0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+/* Pantalla LCD Minimalista e Industrial */
+.machine-display {
+  background-color: #f8fafc;
+  border: 2px solid #cbd5e1;
+  border-radius: 14px;
+  padding: 1rem;
+  font-family: 'Share Tech Mono', monospace;
+  box-shadow: 
+    inset 0 2px 5px rgba(0, 0, 0, 0.05),
+    0 2px 4px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 220px;
+  transition: all 0.3s ease;
+  color: #334155;
+}
+
+.machine-display.lcd-error {
+  background-color: #fef2f2;
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+
+.machine-display.lcd-success {
+  background-color: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+
+.state-indicator-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.state-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.state-badge {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0.15rem 1rem;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  display: inline-block;
+  letter-spacing: 0.05em;
+  color: var(--md-sys-color-primary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+}
+
+.machine-display.lcd-success .state-badge {
+  background: #dcfce7;
+  border-color: #86efac;
+  color: #166534;
+}
+
+.machine-display.lcd-error .state-badge {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+
+.machine-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  color: #475569;
+  padding: 0.2rem 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  font-weight: 600;
+}
+
+.stat-value {
+  font-weight: 700;
+}
+
+.stat-row.highlight {
+  border-bottom: none;
+  background-color: rgba(99, 102, 241, 0.05);
+  padding: 0.4rem;
+  border-radius: 8px;
+}
+
+.stat-row.highlight .stat-value {
+  color: var(--md-sys-color-primary);
+  font-size: 1.1rem;
+}
+
+.machine-display.lcd-success .stat-row.highlight .stat-value {
+  color: var(--md-sys-color-secondary);
+}
+
+.machine-display.lcd-error .stat-row.highlight .stat-value {
+  color: var(--md-sys-color-error);
+}
+
+
+.lcd-message {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.4;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3b82f6;
+}
+
+.machine-display.lcd-error .lcd-message {
+  color: var(--md-sys-color-error);
+}
+
+.machine-display.lcd-success .lcd-message {
+  color: var(--md-sys-color-secondary);
+}
+
+/* Ranura Física de Monedas */
+.coin-entry-module {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: #e2e8f0;
+  border: 2px solid #cbd5e1;
+  border-radius: 12px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.coin-slot-visual {
+  width: 14px;
+  height: 46px;
+  background: #0f172a;
+  border-radius: 4px;
+  border-left: 2px solid #64748b;
+  border-top: 2px solid #64748b;
+  box-shadow: inset 0 4px 6px rgba(0,0,0,0.9);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slot-line {
+  width: 2px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.coin-slot-label {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #475569;
+}
+
+/* Actions Buttons & Containers */
+.action-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 100px;
+  padding: 0.85rem 1.5rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s var(--transition-standard);
+  width: 100%;
+  border: none;
+}
+
+.btn-filled {
+  background-color: #cbd5e1;
+  color: #334155;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.btn-filled:hover:not(:disabled) {
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  box-shadow: 0 4px 15px rgba(var(--md-sys-color-primary-rgb), 0.3);
+}
+
+.btn-filled:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-error {
+  background-color: var(--md-sys-color-error);
+  color: var(--md-sys-color-on-error);
+}
+
+.btn-error:hover {
+  background-color: #dc2626;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+.btn-success {
+  background-color: var(--md-sys-color-secondary);
+  color: #fff;
+}
+
+.btn-success:hover {
+  background-color: #059669;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+
+/* ==========================================================================
+   BANDEJA INFERIOR (DISPENSADOR Y VUELTO)
+   ========================================================================== */
+.machine-bottom {
+  grid-column: 1 / span 2;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Compuerta basculante del Dispensador */
+.dispenser-container {
+  background-color: #334155;
+  border: 4px solid #475569;
+  border-radius: 20px;
+  padding: 0.5rem;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.dispenser-slot {
+  background-color: #0f172a;
+  border-radius: 12px;
+  height: 90px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 8px 16px rgba(0,0,0,0.9);
+}
+
+.dispenser-push-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #475569;
+  border-bottom: 3px solid #0f172a;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+  z-index: 5;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top;
+  border-radius: 8px;
+}
+
+.dispenser-slot.dispensed .dispenser-push-bar {
+  transform: rotateX(-90deg) translateY(-20px);
+  box-shadow: none;
+}
+
+.dispenser-interior {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: #334155;
+  z-index: 1;
+}
+
+.dispenser-icon {
+  font-size: 2rem;
+  transition: all 0.3s ease;
+}
+
+.dispenser-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.dispenser-slot.dispensed .dispenser-interior {
+  color: var(--md-sys-color-secondary);
+  animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Cajetín Semicircular de Vuelto */
+.change-return-module {
+  background-color: #cbd5e1;
+  border: 3px solid #94a3b8;
+  border-radius: 20px;
+  padding: 0.5rem;
+  box-shadow: 
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    0 4px 6px rgba(0,0,0,0.05);
+}
+
+.change-tray {
+  background-color: #0f172a;
+  border-radius: 12px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 8px 16px rgba(0,0,0,0.95);
+  position: relative;
+  overflow: hidden;
+  min-height: 80px;
+}
+
+.change-placeholder {
+  color: #475569;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  font-family: 'Share Tech Mono', monospace;
+  opacity: 0.8;
+  margin-left: 1rem;
+}
+
+.change-coins {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.coin-returned {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fbbf24;
+  border: 1.5px solid #d97706;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 3px 5px rgba(0, 0, 0, 0.4), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  animation: coin-drop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.coin-returned.silver {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #1e293b;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.coin-returned .coin-symbol-sm {
+  font-size: 0.4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.coin-returned .coin-val-sm {
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+@keyframes coin-drop {
+  0% { transform: translateY(-30px) scale(0.5); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+
+/* ==========================================================================
+   BILLETERA DE MONEDAS DEL USUARIO (EXTERNA)
+   ========================================================================== */
+.user-wallet {
+  background: var(--md-sys-color-surface);
+  border: 2px solid var(--md-sys-color-outline);
+  border-radius: 32px;
+  padding: 1.75rem;
+  box-shadow: var(--elevation-2);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  border-left: 6px solid var(--md-sys-color-primary);
+  transition: box-shadow 0.2s ease;
+}
+
+.user-wallet:hover {
+  box-shadow: var(--elevation-3);
+}
+
+.wallet-header {
+  text-align: center;
+}
+
+.wallet-header span {
+  font-size: 2.25rem;
+  color: var(--md-sys-color-primary);
+  background: rgba(var(--md-sys-color-primary-rgb), 0.08);
+  padding: 0.5rem;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.wallet-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface);
+}
+
+.coin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.coin-btn {
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  color: #475569;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.04), 
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  transition: all 0.2s var(--transition-standard);
+}
+
+.coin-btn:hover:not(:disabled) {
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border-color: var(--md-sys-color-primary);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 
+    0 8px 16px rgba(var(--md-sys-color-primary-rgb), 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.coin-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.coin-symbol {
+  font-size: 0.6rem;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.coin-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 0.8rem;
+}

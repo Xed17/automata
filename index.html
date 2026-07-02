@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Máquina Expendedora FSM - Material Design 3</title>
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <main class="main-container">
+    
+    <!-- CONTENEDOR DE LA MÁQUINA EXPENDEDORA FÍSICA -->
+    <div class="vending-machine">
+      
+      <!-- Vitrina de Cristal (Izquierda) -->
+      <div class="machine-showcase">
+        <div class="glass-glare"></div>
+        
+        <!-- Repisas Físicas de la Vitrina -->
+        <div class="shelves-container">
+          
+          <!-- Repisa 1 (Agua) -->
+          <div class="shelf">
+            <div class="spiral-container">
+              <!-- Espiral SVG realista -->
+              <svg class="spiral" viewBox="0 0 100 40">
+                <path d="M 10 20 C 15 5, 20 5, 25 20 C 30 35, 35 35, 40 20 C 45 5, 50 5, 55 20 C 60 35, 65 35, 70 20 C 75 5, 80 5, 85 20 L 95 20" fill="none" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round"/>
+              </svg>
+              <button class="product-card physical-prod" id="prod-agua" onclick="seleccionarProducto('agua', 1.50)">
+                <div class="product-icon-wrapper">
+                  <span class="material-symbols-rounded product-icon">water_drop</span>
+                </div>
+                <span class="product-name">Agua Mineral</span>
+              </button>
+            </div>
+            <div class="shelf-edge">
+              <span class="shelf-code">A1</span>
+              <span class="shelf-price">S/. 1.50</span>
+            </div>
+          </div>
+
+          <!-- Repisa 2 (Gaseosa) -->
+          <div class="shelf">
+            <div class="spiral-container">
+              <svg class="spiral" viewBox="0 0 100 40">
+                <path d="M 10 20 C 15 5, 20 5, 25 20 C 30 35, 35 35, 40 20 C 45 5, 50 5, 55 20 C 60 35, 65 35, 70 20 C 75 5, 80 5, 85 20 L 95 20" fill="none" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round"/>
+              </svg>
+              <button class="product-card physical-prod" id="prod-gaseosa" onclick="seleccionarProducto('gaseosa', 2.00)">
+                <div class="product-icon-wrapper">
+                  <span class="material-symbols-rounded product-icon">local_drink</span>
+                </div>
+                <span class="product-name">Gaseosa Cola</span>
+              </button>
+            </div>
+            <div class="shelf-edge">
+              <span class="shelf-code">B2</span>
+              <span class="shelf-price">S/. 2.00</span>
+            </div>
+          </div>
+
+          <!-- Repisa 3 (Galletas) -->
+          <div class="shelf">
+            <div class="spiral-container">
+              <svg class="spiral" viewBox="0 0 100 40">
+                <path d="M 10 20 C 15 5, 20 5, 25 20 C 30 35, 35 35, 40 20 C 45 5, 50 5, 55 20 C 60 35, 65 35, 70 20 C 75 5, 80 5, 85 20 L 95 20" fill="none" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round"/>
+              </svg>
+              <button class="product-card physical-prod" id="prod-galletas" onclick="seleccionarProducto('galletas', 1.20)">
+                <div class="product-icon-wrapper">
+                  <span class="material-symbols-rounded product-icon">cookie</span>
+                </div>
+                <span class="product-name">Galletas</span>
+              </button>
+            </div>
+            <div class="shelf-edge">
+              <span class="shelf-code">C3</span>
+              <span class="shelf-price">S/. 1.20</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+      <!-- Columna de Control (Derecha) -->
+      <div class="machine-panel">
+        
+        <!-- Pantalla LCD de la Máquina -->
+        <div class="machine-display" id="lcd-display">
+          <div class="state-indicator-box">
+            <span class="state-label">Estado FSM</span>
+            <div class="state-badge text-accent" id="lcd-state">INACTIVO</div>
+          </div>
+          <div class="machine-stats">
+            <div class="stat-row">
+              <span class="stat-label">PRODUCTO:</span>
+              <span class="stat-value" id="lcd-product">NINGUNO</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">COSTO:</span>
+              <span class="stat-value" id="lcd-cost">S/. 0.00</span>
+            </div>
+            <div class="stat-row highlight">
+              <span class="stat-label">INGRESADO:</span>
+              <span class="stat-value" id="lcd-balance">S/. 0.00</span>
+            </div>
+          </div>
+          <div class="lcd-divider"></div>
+          <div class="lcd-message" id="lcd-status-msg">Seleccione un producto para iniciar</div>
+        </div>
+        
+        <!-- Ranura física de monedas -->
+        <div class="coin-entry-module">
+          <div class="coin-slot-visual">
+            <div class="slot-line"></div>
+          </div>
+          <div class="coin-slot-label">S/. RANURA</div>
+        </div>
+
+        <!-- Botón de acción física principal -->
+        <div class="action-container">
+          <button class="btn btn-filled" id="btn-action" onclick="ejecutarAccionContextual()" disabled>
+            <span class="material-symbols-rounded" id="btn-action-icon">shopping_bag</span>
+            <span id="btn-action-text">Intentar Retirar</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Bandeja Inferior (Dispensador y Vuelto) -->
+      <div class="machine-bottom">
+        
+        <!-- Compuerta basculante del Dispensador -->
+        <div class="dispenser-container">
+          <div class="dispenser-slot" id="dispenser-slot">
+            <div class="dispenser-push-bar">EMPUJAR / PUSH</div>
+            <div class="dispenser-interior">
+              <span class="material-symbols-rounded dispenser-icon" id="dispenser-icon">inbox</span>
+              <span class="dispenser-text" id="dispenser-text">Vacío</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cajetín de Vuelto -->
+        <div class="change-return-module">
+          <div class="change-tray" id="change-tray">
+            <div class="change-placeholder" id="change-placeholder">VUELTO</div>
+            <div class="change-coins" id="change-coins-list"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- MÓDULO EXTERNO: BILLETERA DE MONEDAS DEL USUARIO -->
+    <section class="user-wallet" aria-labelledby="wallet-title">
+      <div class="wallet-header">
+        <span class="material-symbols-rounded">account_balance_wallet</span>
+        <h2 id="wallet-title">Mis Monedas</h2>
+      </div>
+      
+      <div class="coin-grid" id="coin-buttons-container">
+        <button class="coin-btn" id="coin-0.1" onclick="insertarMoneda(0.1)" disabled>
+          <span class="coin-symbol">S/.</span>
+          <span class="coin-value">0.10</span>
+        </button>
+        <button class="coin-btn" id="coin-0.2" onclick="insertarMoneda(0.2)" disabled>
+          <span class="coin-symbol">S/.</span>
+          <span class="coin-value">0.20</span>
+        </button>
+        <button class="coin-btn" id="coin-0.5" onclick="insertarMoneda(0.5)" disabled>
+          <span class="coin-symbol">S/.</span>
+          <span class="coin-value">0.50</span>
+        </button>
+        <button class="coin-btn" id="coin-1.0" onclick="insertarMoneda(1.0)" disabled>
+          <span class="coin-symbol">S/.</span>
+          <span class="coin-value">1.00</span>
+        </button>
+        <button class="coin-btn" id="coin-2.0" onclick="insertarMoneda(2.0)" disabled>
+          <span class="coin-symbol">S/.</span>
+          <span class="coin-value">2.00</span>
+        </button>
+        <button class="coin-btn" id="coin-5.0" onclick="insertarMoneda(5.0)" disabled>
+          <span class="coin-symbol">S/.</span>
+          <span class="coin-value">5.00</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
