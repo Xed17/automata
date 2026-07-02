@@ -8,8 +8,7 @@ let FSM_TABLE = {};
 
 // Catálogo de Productos
 const PRODUCTOS = {
-  agua: { nombre: 'Agua Mineral', precio: 1.50, icon: 'water_drop' },
-  gaseosa: { nombre: 'Gaseosa Cola', precio: 2.00, icon: 'local_drink' }
+  agua: { nombre: 'Agua Mineral', precio: 1.50, icon: 'water_drop' }
 };
 
 // Generador Dinámico de la Tabla de Transiciones (FSM)
