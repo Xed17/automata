@@ -477,13 +477,6 @@ body {
   background: rgba(255, 255, 255, 0.05);
 }
 
-.coin-slot-label {
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: #475569;
-}
-
 /* Actions Buttons & Containers */
 .action-container {
   display: flex;
