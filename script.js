@@ -663,7 +663,10 @@ function renderizarGrafoSVGDinamico(price) {
   if (!container || !svg) return;
   container.innerHTML = '';
 
-  const nodes = obtenerNodosMostrar(price);
+  const rawNodes = obtenerNodosMostrar(price);
+  // Separar los nodos periféricos del nodo central de aceptación (que siempre es el precio)
+  const peripheralNodes = rawNodes.filter(val => val !== price);
+  const nodes = [...peripheralNodes, price];
   const N = nodes.length;
   const M = N - 1; // cantidad de nodos periféricos
 
@@ -720,10 +723,9 @@ function renderizarGrafoSVGDinamico(price) {
   for (let i = 0; i < M; i++) {
     coinValues.forEach(c => {
       const nextVal = Number((nodes[i] + c).toFixed(1));
-      let targetIndex = N - 1; // último índice es aceptación por defecto
-      
-      if (nextVal < price) {
-        targetIndex = nodes.indexOf(nextVal);
+      let targetIndex = nodes.indexOf(nextVal);
+      if (targetIndex === -1 && nextVal >= price) {
+        targetIndex = N - 1; // va al nodo central de aceptación por defecto
       }
       
       if (targetIndex !== -1) {
