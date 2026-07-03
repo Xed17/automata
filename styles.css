@@ -165,13 +165,39 @@ body {
 .shelf {
   position: relative;
   background: #1e293b;
-  padding: 0.5rem 1rem 0 1rem;
+  padding: 0.5rem 1rem 0.75rem 1rem;
   border-top: 2px solid #475569;
   border-radius: 2px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: 130px;
+  min-height: 145px;
+}
+
+.shelf-products {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100%;
+  gap: 1rem;
+  padding-bottom: 0.25rem;
+  z-index: 2;
+}
+
+.product-label-small {
+  position: absolute;
+  bottom: -22px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #ef4444;
+  background-color: #0f172a;
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  z-index: 5;
+  pointer-events: none;
+  border: 1px solid #334155;
 }
 
 /* Borde frontal metálico de la repisa */
@@ -805,6 +831,330 @@ body {
   font-size: 0.9rem;
   font-weight: 700;
   font-family: 'Share Tech Mono', monospace;
+}
+
+/* ==========================================================================
+   SECCIÓN ACADÉMICA INTERACTIVA FSM
+   ========================================================================== */
+.academic-panel {
+  grid-column: 1 / span 2;
+  background: var(--md-sys-color-surface);
+  border: 2px solid var(--md-sys-color-outline);
+  border-radius: 32px;
+  padding: 1.75rem;
+  box-shadow: var(--elevation-2);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.academic-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.academic-col h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Tabla de Transición */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  max-height: 380px;
+  overflow-y: auto;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+}
+
+.transition-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  text-align: center;
+  background-color: #ffffff;
+  color: #334155;
+}
+
+.transition-table th,
+.transition-table td {
+  padding: 0.6rem 0.4rem;
+  border: 1px solid #e2e8f0;
+}
+
+.transition-table th {
+  background-color: #f1f5f9;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: #475569;
+  font-size: 0.75rem;
+}
+
+.transition-table th.inputs-header {
+  background-color: #e2e8f0;
+}
+
+.transition-table th.col-state-header,
+.transition-table th.col-action-header {
+  vertical-align: middle;
+}
+
+.state-symbol {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--md-sys-color-primary);
+  width: 25px;
+}
+
+.state-name {
+  font-weight: bold;
+  color: #0f172a;
+  background-color: #f8fafc;
+}
+
+.transition-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Fila activa del FSM */
+.transition-table tr.row-active {
+  background-color: var(--md-sys-color-primary-container) !important;
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: -1.5px;
+}
+
+.transition-table tr.row-active td {
+  font-weight: bold;
+}
+
+.transition-table tr.row-active td.state-name {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-primary);
+}
+
+.font-success {
+  color: var(--md-sys-color-secondary) !important;
+}
+
+.font-error {
+  color: var(--md-sys-color-error) !important;
+}
+
+.font-primary {
+  color: var(--md-sys-color-primary) !important;
+}
+
+.academic-note {
+  font-size: 0.7rem;
+  color: #64748b;
+  margin-top: 0.75rem;
+  font-style: italic;
+}
+
+/* Diagrama de Transición SVG */
+.svg-diagram-wrapper {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 16px;
+  padding: 1rem;
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.transition-svg {
+  display: block;
+  min-width: 100%;
+}
+
+/* Transiciones FSM */
+.trans-path {
+  fill: none;
+  stroke: #cbd5e1;
+  stroke-width: 1;
+  opacity: 0.35;
+  transition: all 0.3s ease;
+}
+
+.trans-path.active-trans {
+  stroke: var(--md-sys-color-primary);
+  stroke-width: 2.2;
+  opacity: 1;
+  stroke-dasharray: none !important;
+}
+
+.trans-path.change-trans {
+  stroke: #d97706 !important;
+  stroke-width: 2.2 !important;
+  opacity: 1 !important;
+  stroke-dasharray: none !important;
+}
+
+.trans-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 8.5px;
+  font-weight: 700;
+  fill: #475569;
+  text-anchor: middle;
+  opacity: 0.6;
+  pointer-events: none;
+  paint-order: stroke;
+  stroke: #ffffff;
+  stroke-width: 3.5px;
+  stroke-linejoin: round;
+  transition: all 0.3s ease;
+}
+
+.trans-label.active-label {
+  opacity: 1;
+  fill: var(--md-sys-color-primary);
+  font-size: 10px;
+  stroke-width: 4px;
+}
+
+.trans-label.change-label {
+  opacity: 1 !important;
+  fill: #92400e !important;
+  font-size: 10px !important;
+  stroke-width: 4px !important;
+}
+
+.trans-label-mealy {
+  font-size: 9px;
+  fill: #059669;
+  opacity: 0.85;
+  font-weight: 800;
+}
+
+.trans-label-mealy.active-label {
+  fill: #047857;
+  opacity: 1;
+  font-size: 11px;
+}
+
+/* Nodos */
+.node-circle {
+  fill: #ffffff;
+  stroke: #64748b;
+  stroke-width: 2.5;
+  transition: all 0.3s ease;
+}
+
+.node-circle-outer {
+  fill: none;
+  stroke: #10b981;
+  stroke-width: 1.5;
+  transition: all 0.3s ease;
+}
+
+.node-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  fill: #334155;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+
+.graph-node-group {
+  transition: transform 0.3s ease;
+}
+
+.graph-node-group.success-node .node-circle {
+  stroke: #10b981;
+}
+
+.graph-node-group.error-node .node-circle {
+  stroke: #ef4444;
+}
+
+.graph-node-group.error-node .node-text {
+  fill: #ef4444;
+}
+
+/* Nodo Activo en el Grafo */
+.graph-node-group.active .node-circle {
+  stroke: var(--md-sys-color-primary);
+  stroke-width: 4;
+  fill: var(--md-sys-color-primary-container);
+  animation: pulse-node 2s infinite alternate;
+}
+
+.graph-node-group.active .node-text {
+  fill: var(--md-sys-color-primary);
+  font-weight: 800;
+}
+
+/* Nodo de Vuelto resaltado */
+.graph-node-group.change-state .node-circle {
+  stroke: #d97706;
+  stroke-width: 3.5;
+  fill: #fef3c7;
+  animation: pulse-node 2s infinite alternate;
+}
+
+.graph-node-group.change-state .node-text {
+  fill: #92400e;
+  font-weight: 800;
+}
+
+.graph-node-group.active.success-node .node-circle {
+  stroke: var(--md-sys-color-secondary);
+  stroke-width: 4;
+  fill: var(--md-sys-color-secondary-container);
+}
+
+.graph-node-group.active.success-node .node-circle-outer {
+  stroke: var(--md-sys-color-secondary);
+  stroke-width: 2.5;
+}
+
+.graph-node-group.active.success-node .node-text {
+  fill: var(--md-sys-color-secondary);
+}
+
+.graph-node-group.active.error-node .node-circle {
+  stroke: var(--md-sys-color-error);
+  stroke-width: 4;
+  fill: var(--md-sys-color-error-container);
+}
+
+.graph-node-group.active.error-node .node-text {
+  fill: var(--md-sys-color-error);
+}
+
+@keyframes pulse-node {
+  0% { filter: drop-shadow(0 0 2px rgba(99, 102, 241, 0.4)); }
+  100% { filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.8)); }
+}
+
+/* Etiquetas y Textos SVG */
+.svg-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  fill: #475569;
+  text-anchor: middle;
+  font-weight: bold;
+}
+
+.svg-label.color-primary {
+  fill: #6366f1;
+}
+
+.svg-label.color-error {
+  fill: #ef4444;
 }
 
 /* Footer */

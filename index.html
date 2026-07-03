@@ -26,27 +26,116 @@
         <!-- Repisas Físicas de la Vitrina -->
         <div class="shelves-container">
           
-          <!-- Repisa 1 (Agua) -->
+          <!-- Repisa 1 (Fila A - Bebidas) -->
           <div class="shelf">
-            <div class="spiral-container">
-              <!-- Espiral SVG realista -->
-              <svg class="spiral" viewBox="0 0 100 40">
-                <path d="M 10 20 C 15 5, 20 5, 25 20 C 30 35, 35 35, 40 20 C 45 5, 50 5, 55 20 C 60 35, 65 35, 70 20 C 75 5, 80 5, 85 20 L 95 20" fill="none" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round"/>
-              </svg>
-              <button class="product-card physical-prod" id="prod-agua" onclick="seleccionarProducto('agua', 1.50)">
-                <div class="product-icon-wrapper">
-                  <span class="material-symbols-rounded product-icon">water_drop</span>
-                </div>
-                <span class="product-name">Agua Mineral</span>
-              </button>
+            <div class="shelf-products">
+              <!-- Producto 1 (Agua Mineral) -->
+              <div class="spiral-container">
+                <svg class="spiral" viewBox="0 0 100 40">
+                  <path d="M 10 20 C 15 5, 20 5, 25 20 C 30 35, 35 35, 40 20 C 45 5, 50 5, 55 20 C 60 35, 65 35, 70 20 C 75 5, 80 5, 85 20 L 95 20" fill="none" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round"/>
+                </svg>
+                <button class="product-card physical-prod" id="prod-agua" onclick="seleccionarProducto('agua', 1.50)">
+                  <div class="product-icon-wrapper">
+                    <span class="material-symbols-rounded product-icon">water_drop</span>
+                  </div>
+                  <span class="product-name">Agua Mineral</span>
+                </button>
+                <div class="product-label-small">A1 - S/. 1.50</div>
+              </div>
+
+              <!-- Producto 2 (Jugo de Fruta) -->
+              <div class="spiral-container">
+                <svg class="spiral" viewBox="0 0 100 40">
+                  <path d="M 10 20 C 15 5, 20 5, 25 20 C 30 35, 35 35, 40 20 C 45 5, 50 5, 55 20 C 60 35, 65 35, 70 20 C 75 5, 80 5, 85 20 L 95 20" fill="none" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round"/>
+                </svg>
+                <button class="product-card physical-prod" id="prod-jugo" onclick="seleccionarProducto('jugo', 1.80)">
+                  <div class="product-icon-wrapper">
+                    <span class="material-symbols-rounded product-icon">bubble_chart</span>
+                  </div>
+                  <span class="product-name">Jugo Fruta</span>
+                </button>
+                <div class="product-label-small">A2 - S/. 1.80</div>
+              </div>
             </div>
             <div class="shelf-edge">
-              <span class="shelf-code">A1</span>
-              <span class="shelf-price">S/. 1.50</span>
+              <span class="shelf-code">FILA A</span>
+              <span class="shelf-desc">BEBIDAS</span>
             </div>
           </div>
 
+          <!-- Repisa 2 (Fila B - Snacks) -->
+          <div class="shelf">
+            <div class="shelf-products">
+              <!-- Producto 3 (Galletas) -->
+              <div class="spiral-container">
+                <svg class="spiral" viewBox="0 0 100 40">
+                  <path d="M 10 20 C 15 5, 20 5, 25 20 C 30 35, 35 35, 40 20 C 45 5, 50 5, 55 20 C 60 35, 65 35, 70 20 C 75 5, 80 5, 85 20 L 95 20" fill="none" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round"/>
+                </svg>
+                <button class="product-card physical-prod" id="prod-galletas" onclick="seleccionarProducto('galletas', 1.20)">
+                  <div class="product-icon-wrapper">
+                    <span class="material-symbols-rounded product-icon">cookie</span>
+                  </div>
+                  <span class="product-name">Galletas</span>
+                </button>
+                <div class="product-label-small">B1 - S/. 1.20</div>
+              </div>
 
+              <!-- Producto 4 (Chocolate) -->
+              <div class="spiral-container">
+                <svg class="spiral" viewBox="0 0 100 40">
+                  <path d="M 10 20 C 15 5, 20 5, 25 20 C 30 35, 35 35, 40 20 C 45 5, 50 5, 55 20 C 60 35, 65 35, 70 20 C 75 5, 80 5, 85 20 L 95 20" fill="none" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round"/>
+                </svg>
+                <button class="product-card physical-prod" id="prod-chocolate" onclick="seleccionarProducto('chocolate', 3.00)">
+                  <div class="product-icon-wrapper">
+                    <span class="material-symbols-rounded product-icon">inventory_2</span>
+                  </div>
+                  <span class="product-name">Chocolate</span>
+                </button>
+                <div class="product-label-small">B2 - S/. 3.00</div>
+              </div>
+            </div>
+            <div class="shelf-edge">
+              <span class="shelf-code">FILA B</span>
+              <span class="shelf-desc">DULCES Y SNACKS</span>
+            </div>
+          </div>
+
+          <!-- Repisa 3 (Fila C - Extras) -->
+          <div class="shelf">
+            <div class="shelf-products">
+              <!-- Producto 5 (Gaseosa Cola) -->
+              <div class="spiral-container">
+                <svg class="spiral" viewBox="0 0 100 40">
+                  <path d="M 10 20 C 15 5, 20 5, 25 20 C 30 35, 35 35, 40 20 C 45 5, 50 5, 55 20 C 60 35, 65 35, 70 20 C 75 5, 80 5, 85 20 L 95 20" fill="none" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round"/>
+                </svg>
+                <button class="product-card physical-prod" id="prod-gaseosa" onclick="seleccionarProducto('gaseosa', 2.00)">
+                  <div class="product-icon-wrapper">
+                    <span class="material-symbols-rounded product-icon">local_drink</span>
+                  </div>
+                  <span class="product-name">Gaseosa Cola</span>
+                </button>
+                <div class="product-label-small">C1 - S/. 2.00</div>
+              </div>
+
+              <!-- Producto 6 (Papas Fritas) -->
+              <div class="spiral-container">
+                <svg class="spiral" viewBox="0 0 100 40">
+                  <path d="M 10 20 C 15 5, 20 5, 25 20 C 30 35, 35 35, 40 20 C 45 5, 50 5, 55 20 C 60 35, 65 35, 70 20 C 75 5, 80 5, 85 20 L 95 20" fill="none" stroke="#cbd5e1" stroke-width="3.5" stroke-linecap="round"/>
+                </svg>
+                <button class="product-card physical-prod" id="prod-papas" onclick="seleccionarProducto('papas', 2.50)">
+                  <div class="product-icon-wrapper">
+                    <span class="material-symbols-rounded product-icon">fastfood</span>
+                  </div>
+                  <span class="product-name">Papas Fritas</span>
+                </button>
+                <div class="product-label-small">C2 - S/. 2.50</div>
+              </div>
+            </div>
+            <div class="shelf-edge">
+              <span class="shelf-code">FILA C</span>
+              <span class="shelf-desc">SALADOS Y EXTRAS</span>
+            </div>
+          </div>
         </div>
       </div>
       
@@ -154,6 +243,68 @@
         </button>
       </div>
     </section>
+
+    <!-- SECCIÓN ACADÉMICA INTERACTIVA FSM (MATEMÁTICA DISCRETA) -->
+    <section class="academic-panel" aria-labelledby="academic-title">
+      <div class="panel-header">
+        <span class="material-symbols-rounded">menu_book</span>
+        <h2 id="academic-title">Representación Formal FSM (Matemática Discreta)</h2>
+      </div>
+      
+      <div class="academic-layout">
+        
+        <!-- Columna de la Tabla de Transición -->
+        <div class="academic-col table-col">
+          <h3>Tabla de Transición de Estados (&delta;)</h3>
+          <div class="table-responsive">
+            <table class="transition-table" id="academic-transition-table">
+              <thead>
+                <tr>
+                  <th rowspan="2"></th>
+                  <th rowspan="2" class="col-state-header">Estado (Q)</th>
+                  <th colspan="6" class="inputs-header">Entrada (monedas de &Sigma;)</th>
+                </tr>
+                <tr>
+                  <th>0.10</th>
+                  <th>0.20</th>
+                  <th>0.50</th>
+                  <th>1.00</th>
+                  <th>2.00</th>
+                  <th>5.00</th>
+                </tr>
+              </thead>
+              <tbody id="academic-transition-tbody">
+                <!-- Se genera dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+          <p class="academic-note">* Leyenda: ( &rarr; ) Estado Inicial | ( &bull; ) Estado Final / Aceptación | ( - ) Estímulo Rechazado</p>
+        </div>
+
+        <!-- Columna del Diagrama de Transición -->
+        <div class="academic-col graph-col">
+          <h3>Diagrama de Transición (Grafo Simplificado)</h3>
+          <div class="svg-diagram-wrapper">
+            <svg class="transition-svg" viewBox="0 0 680 250" id="academic-transition-svg">
+              <!-- Defs para cabezas de flecha -->
+              <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="22" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+                </marker>
+                <marker id="arrow-init" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+                </marker>
+              </defs>
+              
+              <!-- Contenido dinámico del grafo -->
+              <g id="svg-dynamic-content"></g>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
 
   </main>
 
