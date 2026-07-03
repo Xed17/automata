@@ -21,17 +21,17 @@ const PRODUCTOS = {
 function generarTablaTransiciones(price) {
   const table = {};
   const coinValues = [0.1, 0.2, 0.5, 1.0, 2.0, 5.0];
-  const maxCoinsState = Math.round(price * 10);
+  const nodes = obtenerNodosMostrar(price);
+  const finalState = obtenerNombreEstado(price);
   
-  // Generar estados desde q_0_0 hasta q_(price-0.1)
-  for (let i = 0; i < maxCoinsState; i++) {
-    const balance = Number((i / 10).toFixed(1));
-    const stateName = obtenerNombreEstado(balance);
+  nodes.forEach(val => {
+    const stateName = obtenerNombreEstado(val);
+    if (stateName === finalState) return; // Se maneja como q_exito en el motor
+    
     table[stateName] = {};
     
-    // Asignar transiciones para cada moneda
     coinValues.forEach(coin => {
-      const nextBalance = Number((balance + coin).toFixed(1));
+      const nextBalance = Number((val + coin).toFixed(1));
       const inputName = `MONEDA_${coin.toFixed(1)}`;
       
       if (nextBalance >= price) {
@@ -41,14 +41,21 @@ function generarTablaTransiciones(price) {
       }
     });
     
-    // Transición de intento de retiro sin saldo suficiente -> ERROR (Bloqueo)
     table[stateName]['ACCION_RETIRAR'] = 'q_error';
-  }
+  });
   
   // Transiciones desde el estado de Éxito
   table['q_exito'] = {
     'RESET': 'q_0_0'
   };
+  coinValues.forEach(coin => {
+    const inputName = `MONEDA_${coin.toFixed(1)}`;
+    if (coin >= price) {
+      table['q_exito'][inputName] = 'q_exito';
+    } else {
+      table['q_exito'][inputName] = obtenerNombreEstado(coin);
+    }
+  });
   
   // Transiciones desde el estado de Error
   table['q_error'] = {
@@ -93,7 +100,8 @@ function enviarEstimulo(input) {
     if (input.startsWith('MONEDA_')) {
       const coinInserted = Number(input.split('_')[1]);
       if (nextState === 'q_exito') {
-        calculatedChange = Number((accumulatedBalance + coinInserted - targetPrice).toFixed(2));
+        const baseBalance = (currentState === 'q_exito') ? 0.0 : accumulatedBalance;
+        calculatedChange = Number((baseBalance + coinInserted - targetPrice).toFixed(2));
       }
     }
 
@@ -114,6 +122,7 @@ function enviarEstimulo(input) {
       accumulatedBalance = targetPrice;
     } else if (currentState !== 'q_error') {
       accumulatedBalance = obtenerBalanceDeEstado(currentState);
+      changeReturn = 0.0;
     }
 
     console.log(`Transición: δ(${prevState}, ${input}) ➔ ${nextState}`);
@@ -300,7 +309,7 @@ function renderizarInterfaz() {
   // 4. Habilitar/Deshabilitar Monedas
   // Si está en error o exito, las monedas deben estar deshabilitadas
   document.querySelectorAll('.coin-btn').forEach(btn => {
-    btn.disabled = (currentState === 'INACTIVO' || currentState === 'q_exito' || currentState === 'q_error');
+    btn.disabled = (currentState === 'INACTIVO' || currentState === 'q_error');
   });
 
   // 5. Renderizar Monedas de Vuelto
@@ -516,14 +525,21 @@ function renderizarVuelto(monto) {
   });
 }
 
-// Helper para obtener todos los estados secuenciales en pasos de 0.10
+// Helper para obtener todos los estados secuenciales en pasos de 0.10 y asegurar estados de monedas de vuelto
 function obtenerNodosMostrar(price) {
-  const steps = [];
+  const steps = new Set();
   const maxStep = Math.round(price * 10);
   for (let i = 0; i <= maxStep; i++) {
-    steps.push(Number((i / 10).toFixed(1)));
+    steps.add(Number((i / 10).toFixed(1)));
   }
-  return steps;
+  
+  // Siempre asegurar que existan los estados correspondientes a las monedas físicas
+  const coinValues = [0.1, 0.2, 0.5, 1.0, 2.0, 5.0];
+  coinValues.forEach(c => {
+    steps.add(c);
+  });
+  
+  return Array.from(steps).sort((a, b) => a - b);
 }
 
 // Calcular trayectoria de curva cuadrática Bezier recortada en los bordes de los nodos circulares
@@ -619,7 +635,11 @@ function renderizarTablaTransicionDinamica(price) {
     coinValues.forEach(coin => {
       const td = document.createElement('td');
       if (isFinal) {
-        td.innerText = '-';
+        if (coin >= price) {
+          td.innerText = finalState;
+        } else {
+          td.innerText = obtenerNombreEstado(coin);
+        }
       } else {
         const currentBalance = obtenerBalanceDeEstado(state);
         const nextBalance = Number((currentBalance + coin).toFixed(1));
